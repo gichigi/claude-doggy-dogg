@@ -2,15 +2,7 @@
 
 Give Claude Code the voice of Snoop Dogg.
 
-```
-Aight cuz, what we buildin' today?
-```
-
-Instead of this:
-
-```
-How can I assist you today?
-```
+![Claude Doggy Dogg demo](demo.png)
 
 ## Install
 
