@@ -1,41 +1,44 @@
 # Personas
 
-Voice profiles for Claude Code. Switching personas changes how Claude talks without changing what it does.
+Voice profiles for Claude Code. Switching personas changes how Claude talks without changing what it does. Currently ships with Borat, Gordon Ramsay, and Snoop Dogg.
 
-## How it works
+## Setup
 
-Three symlinks form the chain that lets Claude pick up a persona at session start:
+1. Clone this repo wherever you keep code.
+2. Symlink it into your Claude config so Claude can find the persona files:
+   ```bash
+   ln -s /path/to/this/repo ~/.claude/personas
+   ```
+3. Add a load directive to `~/.claude/CLAUDE.md` so Claude reads the active persona at session start:
+   ```md
+   @~/.claude/PERSONA.md
+   ```
+4. Install the `/persona` slash command. Copy `commands/persona.md` from this repo to `~/.claude/commands/persona.md`.
+5. Pick a starting persona:
+   ```bash
+   /persona snoop
+   ```
+   Reload the Claude session for the voice to take effect.
 
-```
-~/.claude/CLAUDE.md
-  └── @~/.claude/PERSONA.md          (loaded by reference)
-        └── symlink → ~/.claude/personas/<name>.md
-              └── symlink → /Users/tahi/Local Documents/Coding/personas/<name>.md
-```
+That's it. From now on, every new Claude Code session loads whichever persona is currently active.
 
-- `CLAUDE.md` loads `PERSONA.md` via the `@` import directive.
-- `PERSONA.md` is a symlink to the active persona file. Swapping personas = re-pointing this symlink.
-- `~/.claude/personas/` is itself a symlink to this repo, so the originals live here under version control.
+## Using personas
 
-Symlinks resolve transitively, so the chain works the same as if the files lived in `~/.claude/` directly.
+- `/persona` shows the active persona and lists available ones
+- `/persona <name>` switches to that persona
+- `/persona off` clears the persona and restores the default voice
 
-## Switching personas
+Reload the session after switching for the new voice to apply.
 
-Run `/persona <name>` in Claude Code. The skill at `~/.claude/skills/persona/SKILL.md` repoints `PERSONA.md` to the chosen file. Reload the session for the new voice to take effect.
+## Personas included
 
-- `/persona` — show the active persona and list available ones
-- `/persona <name>` — switch to that persona
-- `/persona off` — clear the persona (empty `PERSONA.md`, default voice)
+- **borat** is Borat Sagdiyev. Broken formal English, naively sincere, references Kazakhstan.
+- **ramsay** is Gordon Ramsay. Direct and exacting, kitchen metaphors, frustration at bad code paired with proper praise.
+- **snoop** is Snoop Dogg. Laid back, dropped g's, "cuz" and "homie", treats bugs as minor inconveniences.
 
-## Voices
+## Adding your own persona
 
-- **borat** — Borat Sagdiyev. Broken formal English, naively sincere, references Kazakhstan.
-- **ramsay** — Gordon Ramsay. Direct, exacting, kitchen metaphors, frustration at bad code paired with proper praise.
-- **snoop** — Snoop Dogg. Laid back, dropped g's, "cuz"/"homie", treats bugs as minor inconveniences.
-
-## Persona file format
-
-Each persona is a small markdown file with this shape:
+Create a new markdown file in this repo using this shape:
 
 ```md
 # Persona: <Name>
@@ -43,35 +46,43 @@ Each persona is a small markdown file with this shape:
 <One-line character description>
 
 ## Voice rules
-- <Behavioural/tonal rules — how they talk, not just what they say>
+- <Behavioural and tonal rules. Describe how they talk, not just what they say>
 
 ## Example phrases
-- <Phrasebook of representative lines>
+- <A handful of representative lines>
 
 ## Opening
-<Principle for how to open, not a fixed phrase>
+<A principle for how to open in character, not a fixed phrase>
 
 ## Sign-off
-<Principle for how to close, not a fixed phrase>
+<A principle for how to close in character, not a fixed phrase>
 ```
 
-## Design decisions
+Save it as `<name>.md`, then run `/persona <name>` to activate. The `/persona` command auto-discovers any file in this directory, so no other registration is needed.
+
+## How it works
+
+The system runs on a chain of symlinks:
+
+```
+~/.claude/CLAUDE.md
+  loads @~/.claude/PERSONA.md
+        which symlinks to ~/.claude/personas/<name>.md
+              which lives in this repo
+```
+
+`PERSONA.md` is the active persona. Swapping personas just repoints that symlink, which is what `/persona` does. `~/.claude/personas/` is itself a symlink to this repo, so the originals live under version control and edits take effect immediately.
+
+## Design notes
 
 ### Cadence over catchphrase
 
-Early versions had fixed opener and sign-off lines (e.g. Ramsay's "Now get it done. Yes, chef."). This caused two problems:
+Early versions had fixed opener and sign-off lines like Ramsay's "Now get it done. Yes, chef." This caused two problems. First, monotony: every response started and ended identically. Second, misfit: fixed sign-offs often did not match the content of the response, and "Yes, chef" positioned Ramsay backwards anyway since he is the chef, not the junior.
 
-1. **Monotony.** Every response started and ended identically.
-2. **Misfit.** Fixed sign-offs often didn't match the content of the response. "Yes, chef" also positioned Ramsay backwards — he's the chef, not the junior.
+Snoop survived this template by accident because his vocabulary is *sprinkleable*. Small filler words like "cuz", "gonna", and "ya feel me" bleed naturally into every sentence. Ramsay and Borat's vocabulary is *performative*: set pieces that only fire on cue, so when nothing triggers them the bookends are all you hear and the persona reads as costume.
 
-Snoop survived this template because his vocabulary is *sprinkleable* — small filler words ("cuz", "gonna", "ya feel me") that bleed naturally into every sentence. Ramsay and Borat's vocab is *performative* — set pieces that only fire on cue, so when nothing triggers them the bookends are all you hear and the persona reads as costume.
+Current rule: openings and sign-offs are described as principles, not fixed phrases. The cadence in the prose between is what carries the voice.
 
-**Current rule:** Openings and sign-offs are described as principles, not fixed phrases. The model varies them in-character each time. The cadence in the prose between is what carries the voice.
+### Originals live in the repo
 
-### Originals live in the repo, not under `~/.claude/`
-
-The symlink chain means there's exactly one source of truth for each persona file. No copy-paste between locations, no version drift. Editing in this repo immediately affects the live persona.
-
-### No em dashes
-
-Per global instructions in `~/.claude/CLAUDE.md`. Voice rules in each persona should reinforce this where the character would naturally trend toward them.
+The symlink chain means there is exactly one source of truth for each persona file. No copy-paste between locations, no version drift. Editing in the repo immediately affects the live persona.
