@@ -1,5 +1,7 @@
 # Claude Doggy Dogg
 
+[![GitHub stars](https://img.shields.io/github/stars/gichigi/claude-doggy-dogg?style=flat-square)](https://github.com/gichigi/claude-doggy-dogg/stargazers)
+
 Give Claude Code the voice of Snoop Dogg.
 
 ![Claude Doggy Dogg demo](demo.png)
