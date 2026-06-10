@@ -1,18 +1,24 @@
-# Claude Doggy Dogg
+<h1 align="center">Claude Doggy Dogg</h1>
 
 <p align="center">
-  <img src="designs/mascot.png" alt="Claude Doggy Dogg mascot" width="240">
+  <img src="designs/mascot.png" alt="Claude Doggy Dogg mascot" width="200">
 </p>
 
-[![GitHub stars](https://img.shields.io/github/stars/gichigi/claude-doggy-dogg?style=flat-square)](https://github.com/gichigi/claude-doggy-dogg/stargazers)
+<p align="center">
+  <strong>Give Claude Code the voice of Snoop Dogg.</strong>
+</p>
 
-Give Claude Code the voice of Snoop Dogg.
+<p align="center">
+  <a href="https://github.com/gichigi/claude-doggy-dogg/stargazers"><img src="https://img.shields.io/github/stars/gichigi/claude-doggy-dogg?style=flat-square" alt="GitHub stars"></a>
+</p>
 
 ![Claude Doggy Dogg demo](demo.png)
 
+Claude still does everything it normally does -- writes code, fixes bugs, runs your tests. It just does it in Snoop's voice: laid back, unhurried, calling you "cuz" and "homie", treating bugs like minor inconveniences. The work stays sharp. The vibe gets considerably smoother.
+
 ## Install
 
-1. Clone this repo:
+1. Clone the repo:
    ```bash
    git clone https://github.com/gichigi/claude-doggy-dogg.git
    ```
@@ -22,18 +28,14 @@ Give Claude Code the voice of Snoop Dogg.
    ln -s /path/to/claude-doggy-dogg/snoop.md ~/.claude/PERSONA.md
    ```
 
-3. Add this line to `~/.claude/CLAUDE.md`:
+3. Import it from `~/.claude/CLAUDE.md`:
    ```md
    @~/.claude/PERSONA.md
    ```
 
 Reload Claude Code. That's it.
 
-## What changes
-
-Claude still does everything it normally does. It just does it in Snoop's voice -- laid back, unhurried, calling you "cuz" and "homie", treating bugs like minor inconveniences. The work stays sharp. The vibe gets considerably smoother.
-
-## Turning it off
+## Turn it off
 
 ```bash
 rm ~/.claude/PERSONA.md && touch ~/.claude/PERSONA.md
@@ -41,14 +43,12 @@ rm ~/.claude/PERSONA.md && touch ~/.claude/PERSONA.md
 
 Reload the session.
 
-## Mascot
-
-Ten design explorations for the Claude Doggy Dogg mascot, riffing on the Claude mascot -- same chunky pixels, considerably more West Coast. Individual SVGs and PNGs live in [`designs/`](designs/).
-
-![Claude Doggy Dogg mascot design explorations](designs/all-designs.png)
-
 ## How it works
 
-Claude Code loads `~/.claude/CLAUDE.md` at session start. The `@` directive imports any file -- including `PERSONA.md`. When that file contains a voice profile, Claude picks it up as part of its context and speaks accordingly.
+Claude Code loads `~/.claude/CLAUDE.md` at session start. The `@` directive imports any file -- including `PERSONA.md`. When that file holds a voice profile, Claude picks it up as context and speaks accordingly. `snoop.md` is that voice profile.
 
-`snoop.md` is that voice profile.
+## Mascot
+
+Ten pixel-art explorations riffing on the Claude mascot -- same chunky pixels, considerably more West Coast. Sources and individual files live in [`designs/`](designs/).
+
+![Claude Doggy Dogg mascot design explorations](designs/all-designs.png)
