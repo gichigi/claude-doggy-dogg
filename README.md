@@ -37,6 +37,12 @@ rm ~/.claude/PERSONA.md && touch ~/.claude/PERSONA.md
 
 Reload the session.
 
+## Mascot
+
+Ten design explorations for the Claude Doggy Dogg mascot, riffing on the Claude mascot -- same chunky pixels, considerably more West Coast. Individual SVGs and PNGs live in [`designs/`](designs/).
+
+![Claude Doggy Dogg mascot design explorations](designs/all-designs.png)
+
 ## How it works
 
 Claude Code loads `~/.claude/CLAUDE.md` at session start. The `@` directive imports any file -- including `PERSONA.md`. When that file contains a voice profile, Claude picks it up as part of its context and speaks accordingly.
