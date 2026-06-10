@@ -340,15 +340,21 @@ def contact_sheet(path, cols=5):
 
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
-    for name, title, rows in DESIGNS:
-        render_svg(name, rows, os.path.join(here, f"{name}.svg"))
-        render_png(rows).save(os.path.join(here, f"{name}.png"))
-        print(f"  {name} — {title}")
-    contact_sheet(os.path.join(here, "all-designs.png"))
-    print("contact sheet: all-designs.png")
+    out = os.path.join(here, "out")
+    os.makedirs(out, exist_ok=True)
+
+    # Canonical mascot lives at the repo root (it's the README hero).
     render_svg("mascot", MASCOT, os.path.join(here, "mascot.svg"))
     render_png(MASCOT).save(os.path.join(here, "mascot.png"))
     print("mascot: mascot.svg / mascot.png")
+
+    # Explorations + contact sheet are scratch -- written to out/ (gitignored).
+    for name, title, rows in DESIGNS:
+        render_svg(name, rows, os.path.join(out, f"{name}.svg"))
+        render_png(rows).save(os.path.join(out, f"{name}.png"))
+        print(f"  out/{name} — {title}")
+    contact_sheet(os.path.join(out, "all-designs.png"))
+    print("contact sheet: out/all-designs.png")
 
 
 if __name__ == "__main__":

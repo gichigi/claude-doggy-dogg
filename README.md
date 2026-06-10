@@ -1,7 +1,7 @@
 <h1 align="center">Claude Doggy Dogg</h1>
 
 <p align="center">
-  <img src="designs/mascot.png" alt="Claude Doggy Dogg mascot" width="200">
+  <img src="mascot.png" alt="Claude Doggy Dogg mascot" width="200">
 </p>
 
 <p align="center">
@@ -47,8 +47,4 @@ Reload the session.
 
 Claude Code loads `~/.claude/CLAUDE.md` at session start. The `@` directive imports any file -- including `PERSONA.md`. When that file holds a voice profile, Claude picks it up as context and speaks accordingly. `snoop.md` is that voice profile.
 
-## Mascot
-
-Ten pixel-art explorations riffing on the Claude mascot -- same chunky pixels, considerably more West Coast. Sources and individual files live in [`designs/`](designs/).
-
-![Claude Doggy Dogg mascot design explorations](designs/all-designs.png)
+The mascot is pixel art generated from a grid -- run [`generate.py`](generate.py) to remix it and make your own.
