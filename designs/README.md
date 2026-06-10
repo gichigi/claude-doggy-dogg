@@ -2,6 +2,10 @@
 
 Ten takes on a Claude Doggy Dogg mascot, based on the Claude mascot's pixel style: coral `#D97757` on cream `#F0EEE6`, chunky square pixels, black square eyes.
 
+**The chosen mascot** ([`mascot.png`](mascot.png) / [`mascot.svg`](mascot.svg)) combines explorations 03 and 04 — wraparound shades plus the gold chain. It's the hero image at the top of the main README.
+
+![Chosen mascot](mascot.png)
+
 | # | Design | Idea |
 |---|--------|------|
 | 01 | OG Doggy | The baseline dog-ification: floppy ears, snout, tail |

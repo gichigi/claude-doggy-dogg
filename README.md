@@ -1,5 +1,9 @@
 # Claude Doggy Dogg
 
+<p align="center">
+  <img src="designs/mascot.png" alt="Claude Doggy Dogg mascot" width="240">
+</p>
+
 [![GitHub stars](https://img.shields.io/github/stars/gichigi/claude-doggy-dogg?style=flat-square)](https://github.com/gichigi/claude-doggy-dogg/stargazers)
 
 Give Claude Code the voice of Snoop Dogg.

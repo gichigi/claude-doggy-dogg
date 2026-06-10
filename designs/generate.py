@@ -250,6 +250,27 @@ design("10-tha-doggfather", "Tha Doggfather", [
 CELL = 40
 PAD = 2  # cells of padding around each grid
 
+# The chosen mascot: shades + gold chain (explorations 03 + 04 combined).
+# Rendered separately as the canonical logo, not part of the contact sheet.
+MASCOT = [r.replace(" ", "") for r in [
+    "................",
+    "..OO........OO..",
+    "..OO........OO..",
+    "..OOOOOOOOOOOO..",
+    ".KKKKKKKKKKKKKK.",
+    "..KKKKKOOKKKKK..",
+    "..OOOOTTTTOOOO..",
+    "..OOOOTKKTOOOO..",
+    "..GOOOTTTTOOOG..",
+    "..OGOOOOOOOOGO..",
+    "..OOGGOOOOGGOO..",
+    "..OOOOGGGGOOOO..",
+    "..OOOOOGGOOOOO..",
+    "..OOOOOOOOOOOO..",
+    "..OO..OO..OO....",
+    "..OO..OO..OO....",
+]]
+
 
 def grid_size(rows):
     return max(len(r) for r in rows), len(rows)
@@ -325,6 +346,9 @@ def main():
         print(f"  {name} — {title}")
     contact_sheet(os.path.join(here, "all-designs.png"))
     print("contact sheet: all-designs.png")
+    render_svg("mascot", MASCOT, os.path.join(here, "mascot.svg"))
+    render_png(MASCOT).save(os.path.join(here, "mascot.png"))
+    print("mascot: mascot.svg / mascot.png")
 
 
 if __name__ == "__main__":
