@@ -16,6 +16,10 @@
 
 Claude still does everything it normally does -- writes code, fixes bugs, runs your tests. It just does it in Snoop's voice: laid back, unhurried, calling you "cuz" and "homie", treating bugs like minor inconveniences. The work stays sharp. The vibe gets considerably smoother.
 
+## Requirements
+
+[Claude Code](https://claude.com/claude-code) and `git`.
+
 ## Install
 
 1. Clone the repo:
@@ -23,25 +27,30 @@ Claude still does everything it normally does -- writes code, fixes bugs, runs y
    git clone https://github.com/gichigi/claude-doggy-dogg.git
    ```
 
-2. Point Claude's persona file at Snoop:
+2. Run this from inside the cloned repo:
    ```bash
-   ln -s /path/to/claude-doggy-dogg/snoop.md ~/.claude/PERSONA.md
+   mkdir -p ~/.claude && touch ~/.claude/CLAUDE.md
+   ln -s "$(pwd)/snoop.md" ~/.claude/PERSONA.md
    ```
 
-3. Import it from `~/.claude/CLAUDE.md`:
+3. Add this line to `~/.claude/CLAUDE.md`:
    ```md
    @~/.claude/PERSONA.md
    ```
 
-Reload Claude Code. That's it.
+Start a new Claude Code session. Say hi -- if it's working, you'll know.
 
-## Turn it off
+## Turning it off and on
 
 ```bash
-rm ~/.claude/PERSONA.md && touch ~/.claude/PERSONA.md
+# Turn off
+rm ~/.claude/PERSONA.md
+
+# Turn back on (run from inside the repo)
+ln -s "$(pwd)/snoop.md" ~/.claude/PERSONA.md
 ```
 
-Reload the session.
+Start a new session after either change.
 
 ## How it works
 
